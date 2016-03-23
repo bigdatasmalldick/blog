@@ -5,6 +5,8 @@ namespace BlogBundle\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use BlogBundle\Entity\Post;
 
 class DefaultController extends Controller
 {
@@ -13,42 +15,14 @@ class DefaultController extends Controller
      */
     public function indexAction(Request $request)
     {
-        // replace this example code with whatever you need
-        return $this->render('default/index.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.root_dir').'/..'),
-        ]);
-    }
+        $postRepository = $this->getDoctrine()
+            ->getRepository('BlogBundle:Post');
 
-    /**
-     * @Route("/about", name="about")
-     */
-    public function aboutAction(Request $request)
-    {
-        // replace this example code with whatever you need
-        return $this->render('default/about.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.root_dir').'/..'),
-        ]);
-    }
+        $posts = $postRepository->findAll();
 
-    /**
-     * @Route("/contact", name="contact")
-     */
-    public function contactAction(Request $request)
-    {
-        // replace this example code with whatever you need
-        return $this->render('default/contact.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.root_dir').'/..'),
-        ]);
-    }
-
-    /**
-     * @Route("/post", name="post")
-     */
-    public function postAction(Request $request)
-    {
-        // replace this example code with whatever you need
-        return $this->render('default/post.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.root_dir').'/..'),
-        ]);
+        $templateData = array(
+            'posts' => $posts
+            );
+        return $this->render('default/index.html.twig', $templateData);
     }
 }

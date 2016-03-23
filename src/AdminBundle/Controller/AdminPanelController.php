@@ -17,14 +17,4 @@ class AdminPanelController extends Controller
             'base_dir' => realpath($this->getParameter('kernel.root_dir').'/..'),
         ]);
     }
-
-    /**
-     * @Route("/admin/login", name="admin-login")
-     */
-    public function loginAction(Request $request)
-    {
-        return $this->render('admin/default/login.html.twig', [
-            'base_dir' => realpath($this->getParameter('kernel.root_dir').'/..'),
-        ]);
-    }
 }

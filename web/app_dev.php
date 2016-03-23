@@ -1,4 +1,6 @@
 <?php
+	echo 'hehe';
+	die();
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Debug\Debug;
